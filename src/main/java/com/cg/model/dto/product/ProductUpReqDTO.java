@@ -21,7 +21,7 @@ public class ProductUpReqDTO {
 
     private String title;
     private String price;
-    private Long categoryId;
+    private String categoryId;
     private MultipartFile avatar;
     private ProductAvatar productAvatar;
 
@@ -38,7 +38,7 @@ public class ProductUpReqDTO {
         return new ProductCreReqDTO()
                 .setTitle(title)
                 .setPrice(price)
-                .setCategoryId(categoryId)
+                .setCategoryId(Long.parseLong(categoryId))
                 .setAvatar(avatar)
                 ;
     }

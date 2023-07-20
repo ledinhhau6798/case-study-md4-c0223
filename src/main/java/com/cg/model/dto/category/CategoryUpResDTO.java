@@ -1,4 +1,5 @@
 package com.cg.model.dto.category;
+import com.cg.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,4 +14,11 @@ import lombok.experimental.Accessors;
 public class CategoryUpResDTO {
      private Long id;
     private String title;
+
+    public Category toCategory(){
+        return new Category()
+                .setId(id)
+                .setTitle(title)
+                ;
+    }
 }

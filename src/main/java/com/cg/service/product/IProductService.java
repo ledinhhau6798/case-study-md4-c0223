@@ -13,7 +13,7 @@ import java.util.List;
 public interface IProductService extends IGeneralService<Product,Long> {
     List<ProductDTO> findAllProductDTO();
     Product create(ProductCreReqDTO productCreReqDTO, Category category);
-//
+
     Product update(Long id, ProductUpReqDTO productUpReqDTO,Category category);
-//    void deleteByIdTrue(Long id);
+    void deleteByIdTrue(Product product);
 }

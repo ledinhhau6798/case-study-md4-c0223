@@ -102,10 +102,11 @@ public class ProductServiceImpl implements IProductService{
         return productUpdate;
     }
 
-//    @Override
-//    public void deleteByIdTrue(Long id) {
-//        productRepository.deleteByIdTrue(id);
-//    }
+    @Override
+    public void deleteByIdTrue(Product product) {
+       product.setDeleted(true);
+       productRepository.save(product);
+    }
 
     private void uploadAndSaveProductImage(ProductCreReqDTO productCreReqDTO, ProductAvatar productAvatar) {
         try {
