@@ -24,12 +24,14 @@ public class ProductDTO {
     private CategoryDTO category;
     private ProductAvatarResDTO avatar;
 
-    public ProductDTO(Long id, String title, BigDecimal price, Category category, ProductAvatarResDTO avatar){
+    public ProductDTO(Long id, String title, BigDecimal price, Category category, ProductAvatar avatar){
         this.id=id;
         this.title=title;
         this.price=price;
         this.category=category.toCategoryDTO();
         this.avatar = avatar.toProductAvatarResDTO();
     }
+
+
 
 }

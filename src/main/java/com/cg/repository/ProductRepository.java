@@ -18,7 +18,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             "pro.title, " +
             "pro.price, " +
             "pro.category, " +
-            "pro.productAvatar " +
+            "pro.productAvatar" +
             ")" +
             "FROM Product as pro " +
             "WHERE pro.deleted = false"

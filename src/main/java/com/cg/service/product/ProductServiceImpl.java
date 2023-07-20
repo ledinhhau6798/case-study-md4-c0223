@@ -8,6 +8,7 @@ import com.cg.model.ProductAvatar;
 
 import com.cg.model.dto.product.ProductCreReqDTO;
 import com.cg.model.dto.product.ProductDTO;
+import com.cg.model.dto.product.ProductUpReqDTO;
 import com.cg.repository.CategoryRepository;
 import com.cg.repository.ProductAvatarRepository;
 import com.cg.repository.ProductRepository;
@@ -86,18 +87,21 @@ public class ProductServiceImpl implements IProductService{
 
         return product;
     }
-//
-//    @Override
-//    public Product update(Product product, ProductUpReqDTO productUpReqDTO) {
-//        CategoryUpReqDTO categoryUpReqDTO =productUpReqDTO.getCategory();
-//        Category category = categoryUpReqDTO.toCategory(product.getCategory().getId());
-//        categoryRepository.save(category);
-//
-//        Product productUpdate = productUpReqDTO.toProduct(product.getId(),category);
-//        productRepository.save(productUpdate);
-//        return productUpdate;
-//    }
-//
+
+    @Override
+    public Product update(Long id, ProductUpReqDTO productUpReqDTO,Category category) {
+        ProductAvatar productAvatar = new ProductAvatar();
+        productAvatarRepository.save(productAvatar);
+       uploadAndSaveProductImage(productUpReqDTO.toProductCreReqDTO(),productAvatar);
+       Product productUpdate = productUpReqDTO.toProductChangeImage(category);
+        productUpdate.setId(id);
+        productUpdate.setProductAvatar(productAvatar);
+
+        productRepository.save(productUpdate);
+
+        return productUpdate;
+    }
+
 //    @Override
 //    public void deleteByIdTrue(Long id) {
 //        productRepository.deleteByIdTrue(id);
@@ -120,4 +124,6 @@ public class ProductServiceImpl implements IProductService{
             throw new DataInputException("Upload hình ảnh thất bại");
         }
     }
+
+
 }

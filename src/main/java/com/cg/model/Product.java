@@ -1,6 +1,8 @@
 package com.cg.model;
 
 import com.cg.model.dto.product.ProductCreResDTO;
+import com.cg.model.dto.product.ProductDTO;
+import com.cg.model.dto.product.ProductUpResDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -54,4 +56,22 @@ public class Product extends BaseEntity {
      }
 
 
+    public ProductDTO toProductDTO() {
+         return new ProductDTO()
+                 .setId(id)
+                 .setTitle(title)
+                 .setPrice(price)
+                 .setCategory(category.toCategoryDTO())
+                 .setAvatar(productAvatar.toProductAvatarDTO())
+                 ;
+    }
+
+    public ProductUpResDTO toProductUpResDTO() {
+         return new ProductUpResDTO()
+                 .setId(id)
+                 .setTitle(title)
+                 .setPrice(price)
+                 .setCategoryTitle(category.getTitle())
+                 .setAvatar(productAvatar.toProductAvatarResDTO());
+    }
 }

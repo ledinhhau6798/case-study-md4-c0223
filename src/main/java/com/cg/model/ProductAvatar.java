@@ -50,5 +50,13 @@ public class ProductAvatar extends BaseEntity {
                 ;
 
     }
+    public ProductAvatarResDTO toProductAvatarDTO(){
+        return new ProductAvatarResDTO()
+                .setId(id)
+                .setFileName(fileName)
+                .setFileFolder(fileFolder)
+                .setFileUrl(fileUrl)
+                ;
+    }
 
 }

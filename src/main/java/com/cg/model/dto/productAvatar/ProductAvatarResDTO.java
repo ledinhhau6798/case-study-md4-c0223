@@ -18,9 +18,12 @@ public class ProductAvatarResDTO {
     private String fileFolder;
     private String fileUrl;
 
-//    public ProductAvatarResDTO toProductAvatarResDTO() {
-//        return new ProductAvatarResDTO()
-//                .setId(id)
-//                .setFileName()
-//    }
+    public ProductAvatarResDTO toProductAvatarResDTO() {
+        return new ProductAvatarResDTO()
+                .setId(id)
+                .setFileName(fileName)
+                .setFileFolder(fileFolder)
+                .setFileUrl(fileUrl)
+                ;
+    }
 }
