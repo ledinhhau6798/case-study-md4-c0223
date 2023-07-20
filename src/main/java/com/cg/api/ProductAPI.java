@@ -8,10 +8,12 @@ import com.cg.model.dto.category.CategoryUpResDTO;
 import com.cg.model.dto.product.*;
 import com.cg.service.category.ICategoryService;
 import com.cg.service.product.IProductService;
+import com.cg.utils.AppUtils;
 import com.cg.utils.ValidateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -30,6 +32,9 @@ public class ProductAPI {
     private ICategoryService categoryService;
     @Autowired
     private ValidateUtils validateUtils;
+
+    @Autowired
+    private AppUtils appUtils;
 
     @GetMapping
     public ResponseEntity<?> getAllProduct() {
@@ -52,11 +57,17 @@ public class ProductAPI {
 
 
     @PostMapping("/create")
-    public ResponseEntity<?> createProduct(@ModelAttribute ProductCreReqDTO productCreReqDTO) {
+    public ResponseEntity<?> createProduct(@ModelAttribute ProductCreReqDTO productCreReqDTO, BindingResult bindingResult) {
 
+        new ProductCreReqDTO().validate(productCreReqDTO,bindingResult);
+        if (bindingResult.hasFieldErrors()){
+            return appUtils.mapErrorToResponse(bindingResult);
+        }
         Category category = categoryService.findById(productCreReqDTO.getCategoryId()).orElseThrow(() -> {
             throw new DataInputException("Danh mục không tồn tại");
         });
+
+
 
         Product product = productService.create(productCreReqDTO, category);
         ProductCreResDTO productCreResDTO = product.toProductCreResDTO();
@@ -64,7 +75,7 @@ public class ProductAPI {
     }
 
     @PatchMapping("edit/{productId}")
-    public ResponseEntity<?> updateProduct(@PathVariable("productId") String productIdStr, @ModelAttribute ProductUpReqDTO productUpReqDTO) {
+    public ResponseEntity<?> updateProduct(@PathVariable("productId") String productIdStr, @ModelAttribute ProductUpReqDTO productUpReqDTO,BindingResult bindingResult) {
         if (!validateUtils.isNumberValid(productIdStr)) {
             Map<String, String> data = new HashMap<>();
             data.put("message", "Mã Sản phẩm không hợp lệ");
@@ -75,6 +86,11 @@ public class ProductAPI {
         Optional<Product> productOptional = productService.findById(productId);
         if (!productOptional.isPresent()) {
             throw new DataInputException("Mã sản phẩm không tồn tại");
+        }
+
+        new ProductUpReqDTO().validate(productUpReqDTO,bindingResult);
+        if (bindingResult.hasFieldErrors()){
+            return appUtils.mapErrorToResponse(bindingResult);
         }
 
         String categoryIdStr = productUpReqDTO.getCategoryId();
