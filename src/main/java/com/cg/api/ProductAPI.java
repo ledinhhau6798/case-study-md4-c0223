@@ -125,4 +125,17 @@ public class ProductAPI {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/search/{categoryId}")
+    public ResponseEntity<List<ProductDTO>> getProductBycategory(@PathVariable("categoryId") String categoryIdStr){
+
+        if (!validateUtils.isNumberValid(categoryIdStr)) {
+            throw new DataInputException("Mã sản phẩm không hợp lệ");
+        }
+        Long categoryId = Long.parseLong(categoryIdStr);
+
+         List<ProductDTO> productDTO  = productService.findAllByCategoryLike(categoryId);
+
+         return new ResponseEntity<>(productDTO,HttpStatus.OK);
+    }
 }

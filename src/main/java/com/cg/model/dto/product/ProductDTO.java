@@ -21,13 +21,16 @@ public class ProductDTO {
     private Long id;
     private String title;
     private BigDecimal price;
+
+    private String unit;
     private CategoryDTO category;
     private ProductAvatarResDTO avatar;
 
-    public ProductDTO(Long id, String title, BigDecimal price, Category category, ProductAvatar avatar){
+    public ProductDTO(Long id, String title, BigDecimal price,String unit, Category category, ProductAvatar avatar){
         this.id=id;
         this.title=title;
         this.price=price;
+        this.unit = unit;
         this.category=category.toCategoryDTO();
         this.avatar = avatar.toProductAvatarResDTO();
     }

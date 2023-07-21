@@ -23,7 +23,11 @@ public class ProductUpReqDTO implements Validator {
 
     private String title;
     private String price;
+
+    private String unit;
     private String categoryId;
+
+
     private MultipartFile avatar;
     private ProductAvatar productAvatar;
 
@@ -31,6 +35,7 @@ public class ProductUpReqDTO implements Validator {
         return new Product()
                 .setId(id)
                 .setTitle(title)
+                .setUnit(unit)
                 .setPrice(BigDecimal.valueOf(Long.parseLong(price)))
                 .setCategory(category)
                 ;
@@ -40,6 +45,7 @@ public class ProductUpReqDTO implements Validator {
         return new ProductCreReqDTO()
                 .setTitle(title)
                 .setPrice(price)
+                .setUnit(unit)
                 .setCategoryId(Long.parseLong(categoryId))
                 .setAvatar(avatar)
                 ;
@@ -48,6 +54,7 @@ public class ProductUpReqDTO implements Validator {
     public Product toProductChangeImage(Category category) {
         return new Product()
                 .setTitle(title)
+                .setUnit(unit)
                 .setPrice(BigDecimal.valueOf(Long.parseLong(price)))
                 .setCategory(category)
                 ;

@@ -32,6 +32,9 @@ public class Product extends BaseEntity {
     @Column
     private BigDecimal price;
 
+    @Column
+    private String unit;
+
 
     @ManyToOne
     @JoinColumn(name = "category_id",referencedColumnName = "id",nullable = false)
@@ -50,6 +53,7 @@ public class Product extends BaseEntity {
                  .setId(id)
                  .setTitle(title)
                  .setPrice(price)
+                 .setUnit(unit)
                  .setCategoryTitle(category.getTitle())
                  .setAvatar(productAvatar.toProductAvatarResDTO());
 
@@ -61,6 +65,7 @@ public class Product extends BaseEntity {
                  .setId(id)
                  .setTitle(title)
                  .setPrice(price)
+                 .setUnit(unit)
                  .setCategory(category.toCategoryDTO())
                  .setAvatar(productAvatar.toProductAvatarDTO())
                  ;
@@ -71,6 +76,7 @@ public class Product extends BaseEntity {
                  .setId(id)
                  .setTitle(title)
                  .setPrice(price)
+                 .setUnit(unit)
                  .setCategoryTitle(category.getTitle())
                  .setAvatar(productAvatar.toProductAvatarResDTO());
     }

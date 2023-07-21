@@ -17,6 +17,7 @@ public class ProductUpResDTO {
     private Long id;
     private String title;
     private BigDecimal price;
+    private String unit;
     private String categoryTitle;
 
     private ProductAvatarResDTO avatar;

@@ -16,4 +16,6 @@ public interface IProductService extends IGeneralService<Product,Long> {
 
     Product update(Long id, ProductUpReqDTO productUpReqDTO,Category category);
     void deleteByIdTrue(Product product);
+
+    List<ProductDTO> findAllByCategoryLike(Long category);
 }

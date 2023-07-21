@@ -108,6 +108,11 @@ public class ProductServiceImpl implements IProductService{
        productRepository.save(product);
     }
 
+    @Override
+    public List<ProductDTO> findAllByCategoryLike(Long categoryId) {
+        return productRepository.findAllByCategoryLike(categoryId);
+    }
+
     private void uploadAndSaveProductImage(ProductCreReqDTO productCreReqDTO, ProductAvatar productAvatar) {
         try {
             Map uploadResult = uploadService.uploadImage(productCreReqDTO.getAvatar(), uploadUtils.buildImageUploadParams(productAvatar));

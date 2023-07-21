@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 public class ProductCreReqDTO implements Validator {
     private String title;
     private String price;
+    private String unit;
     private Long categoryId;
     private MultipartFile avatar;
 
@@ -28,6 +29,7 @@ public class ProductCreReqDTO implements Validator {
         return new Product()
                 .setTitle(title)
                 .setPrice(BigDecimal.valueOf(Long.parseLong(price)))
+                .setUnit(unit)
                 .setCategory(category)
                 ;
     }

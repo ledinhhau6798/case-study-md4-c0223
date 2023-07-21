@@ -1,5 +1,6 @@
 package com.cg.repository;
 
+import com.cg.model.Category;
 import com.cg.model.Product;
 
 import com.cg.model.dto.product.ProductDTO;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import static org.hibernate.loader.Loader.SELECT;
+
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
@@ -17,6 +20,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             "pro.id, " +
             "pro.title, " +
             "pro.price, " +
+            "pro.unit, " +
             "pro.category, " +
             "pro.productAvatar" +
             ")" +
@@ -24,4 +28,17 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             "WHERE pro.deleted = false"
     )
 List<ProductDTO> findAllProductDTO();
+
+
+@Query("SELECT NEW com.cg.model.dto.product.ProductDTO (" +
+        "pr.id, " +
+        "pr.title, " +
+        "pr.price, " +
+        "pr.unit, " +
+        "pr.category, " +
+        "pr. productAvatar " +
+        ")" +
+        "From Product AS pr " +
+        "WHERE pr.category.id = :categoryId")
+List<ProductDTO> findAllByCategoryLike(Long categoryId);
 }
