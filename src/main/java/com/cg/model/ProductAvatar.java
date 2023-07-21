@@ -47,6 +47,8 @@ public class ProductAvatar extends BaseEntity {
                 .setFileName(fileName)
                 .setFileFolder(fileFolder)
                 .setFileUrl(fileUrl)
+                .setFileType(fileType)
+                .setCloudId(cloudId)
                 ;
 
     }
@@ -56,6 +58,8 @@ public class ProductAvatar extends BaseEntity {
                 .setFileName(fileName)
                 .setFileFolder(fileFolder)
                 .setFileUrl(fileUrl)
+                .setFileType(fileType)
+                .setCloudId(cloudId)
                 ;
     }
 

@@ -262,11 +262,15 @@
 
 </body>
 <script src="/assets/jquery/jquery-3.7.0.min.js"></script>
+<script src="/assets/js/jquery.validate.min.js"></script>
 <script src="/assets/bootstrap/v.5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/app.js"></script>
 
 <script>
   const page = {
     url: {
+      getAllProducts:"http://localhost:9000/api/products",
+      getALLTablOrders:"http://localhost:9000/api/tableOrders"
 
     },
     elements: {},
@@ -287,8 +291,10 @@ page.elements.boardWaiting = $('.board');
 page.elements.contentItems = $('.content-items');
 page.elements.btnShowHide = $('#btnShowHide');
 
+let product = new Product();
+let tableOrder = new TableOrder();
 
-  page.commands.renderTable = () => {
+  page.commands.renderTable = (tableOrder) => {
     return `
             <div class="container-tab-item col-3">
               <div class="tab-header  text-center">
@@ -297,312 +303,67 @@ page.elements.btnShowHide = $('#btnShowHide');
                 </button>
               </div>
               <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
+                <span>${tableOrder.status}</span>
+                <p>${tableOrder.title}</p>
                </div>
             </div>
-
-            <div class="container-tab-item col-3">
-              <div class="tab-header busy text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item busy text-center">
-                <span>Busy</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-
-
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-            <div class="container-tab-item col-3">
-              <div class="tab-header  text-center">
-                <button style="border: none; background-color: none;">
-                  <i class="fas fa-coffee"></i>
-                </button>
-              </div>
-              <div class="tab-content-item text-center">
-                <span>Free</span>
-                <p>Bàn 1</p>
-               </div>
-            </div>
-
-
-
         `
   }
 
-  page.commands.renderProduct = () => {
+  page.commands.renderProduct = (product) => {
+          const category = product.category
+          const avatar = product.avatar
     return `
-            <div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div>
 
             <div class="container-product-item">
               <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
+                  <img src="${avatar.fileUrl}" style="height: 100%; width: 100%">
               </div>
               <div class="content-product text-center">
                   <div class="product-title">
-                      Cafe den
+                      ${product.title}
                   </div>
                   <span>
-                      1000.00000
+                      ${product.price}
                   </span>
                 </div>
             </div>
-
-            <div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div><div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div><div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div><div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div><div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div><div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div><div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div><div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div><div class="container-product-item">
-              <div class="image-product" style="height: 180px ;width: 180px;">
-                  <img src="https://res.cloudinary.com/cloudinarymen/image/upload/c_limit,w_180,h_180,q_100/White-Lotus-Restaurant/product/9c8a19d0-6755-4121-ab5e-b965c806d1c3.jpg" alt="">
-              </div>
-              <div class="content-product text-center">
-                  <div class="product-title">
-                      Cafe den
-                  </div>
-                  <span>
-                      1000.00000
-                  </span>
-                </div>
-            </div>
-        `
+  `
   }
 
   page.commands.getAllTable = () => {
-    const tablePannel = document.querySelector('#table-pannel');
-    tablePannel.innerHTML = '';
-    const str = page.commands.renderTable();
-    tablePannel.innerHTML += str;
+    // const tablePannel = document.querySelector('#table-pannel');
+    // tablePannel.innerHTML = '';
+    // const str = page.commands.renderTable();
+    // tablePannel.innerHTML += str;
+    page.elements.tablePannel.empty();
+    $.ajax({
+      type: 'GET',
+      url:page.url.getALLTablOrders
+    })
+            .done((data) =>{
+              console.log(data)
+              data.forEach(item =>{
+                tableOrder = item;
+                let str = page.commands.renderTable(tableOrder)
+                page.elements.tablePannel.prepend(str)
+              })
+            })
   }
 
   page.commands.getAllProduct = () => {
-    const menuPannel = document.querySelector('#menu-pannel');
-    menuPannel.innerHTML = '';
-    const str = page.commands.renderProduct();
-    menuPannel.innerHTML += str;
+    page.elements.menuPannel.empty();
+    $.ajax({
+      type:'GET',
+      url: page.url.getAllProducts
+    })
+            .done((data) =>{
+              data.forEach(item => {
+                product = item;
+                const str = page.commands.renderProduct(product)
+                page.elements.menuPannel.prepend(str);
+              })
+            })
   }
 
   page.loadData = () => {

@@ -1,8 +1,8 @@
 package com.cg.model.enums;
 
 public enum EStatus {
-    ROLE_STOCKING("STOCKING"),
-    ROLE_OUT_OF_STOCK("OUT_OF_STOCK");
+    ROLE_STOCKING("Rãnh"),
+    ROLE_OUT_OF_STOCK("Bận");
 
     private final String value;
 
@@ -13,4 +13,6 @@ public enum EStatus {
     public String getValue() {
         return this.value;
     }
+
+
 }

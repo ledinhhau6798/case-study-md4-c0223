@@ -17,6 +17,9 @@ public class ProductAvatarResDTO {
     private String fileName;
     private String fileFolder;
     private String fileUrl;
+     private String fileType;
+
+    private String cloudId;
 
     public ProductAvatarResDTO toProductAvatarResDTO() {
         return new ProductAvatarResDTO()
@@ -24,6 +27,8 @@ public class ProductAvatarResDTO {
                 .setFileName(fileName)
                 .setFileFolder(fileFolder)
                 .setFileUrl(fileUrl)
+                .setFileType(fileType)
+                .setCloudId(cloudId)
                 ;
     }
 }

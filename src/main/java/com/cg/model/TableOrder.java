@@ -1,4 +1,6 @@
 package com.cg.model;
+import com.cg.model.dto.tableOrder.TableOrderDTO;
+import com.cg.model.enums.EStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +25,9 @@ public class TableOrder extends BaseEntity {
 
      @Column
     private String title;
+     @Enumerated(EnumType.STRING)
+    private EStatus status;
 
-     @Column
-    private String status;
+
 
 }
