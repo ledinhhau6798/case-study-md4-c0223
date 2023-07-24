@@ -1,5 +1,6 @@
 package com.cg.model;
 
+import com.cg.model.dto.staff.StaffDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,7 +31,8 @@ public class Staff extends BaseEntity {
     @Column
     private String address;
 
-    @Column String phone;
+    @Column
+    private String phone;
 
     @OneToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id",nullable = false)
@@ -39,6 +41,17 @@ public class Staff extends BaseEntity {
     @OneToMany(mappedBy = "staff")
     @JsonIgnore
     private List<Order> orders;
+
+
+    public StaffDTO toStaffDTO() {
+        return new StaffDTO()
+                .setId(id)
+                .setTitle(title)
+                .setAddress(address)
+                .setPhone(phone)
+                .setUser(user.toUserDTO())
+                ;
+    }
 
 
 }

@@ -1,6 +1,9 @@
 package com.cg.model;
 
 
+import com.cg.model.dto.order.OrderResDTO;
+import com.cg.model.dto.orderDetail.OrderDetailDTO;
+import com.cg.model.dto.staff.StaffDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +12,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -39,4 +43,18 @@ public class Order extends BaseEntity {
     private List<OrderDetail> orderDetails;
 
 
+
+    public OrderResDTO toOrderResDTO(){
+        List<OrderDetailDTO> orderDetailDTOS = new ArrayList<>();
+        for(int i=0;i<this.getOrderDetails().size();i++){
+            OrderDetailDTO orderDetailDTO = this.getOrderDetails().get(i).toOrderDetailDTO();
+            orderDetailDTOS.add(orderDetailDTO);
+        }
+        return new OrderResDTO()
+                .setId(id)
+                .setStaff(staff.toStaffDTO())
+                .setTableOrder(tableOrder.toTableOrderDTO())
+                .setOrderDetails(orderDetailDTOS)
+                ;
+    }
 }

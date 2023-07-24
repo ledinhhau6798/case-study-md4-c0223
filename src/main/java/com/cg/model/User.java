@@ -1,5 +1,6 @@
 package com.cg.model;
 
+import com.cg.model.dto.user.UserDTO;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -42,4 +43,14 @@ public class User extends BaseEntity {
                 '}';
     }
 
+    public UserDTO toUserDTO() {
+        return new UserDTO()
+                .setId(id)
+                .setUsername(username)
+                .setPassword(password)
+                .setRole(role.toRole())
+                ;
+
+
+    }
 }

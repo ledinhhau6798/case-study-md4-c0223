@@ -24,4 +24,11 @@ public class TableOrderDTO {
     }
 
 
+    public TableOrderDTO toTableOrderDTO() {
+        return new TableOrderDTO()
+                .setId(id)
+                .setTitle(title)
+                .setStatus(status)
+                ;
+    }
 }

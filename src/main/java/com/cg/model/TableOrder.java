@@ -29,5 +29,11 @@ public class TableOrder extends BaseEntity {
     private EStatus status;
 
 
-
+    public TableOrderDTO toTableOrderDTO() {
+        return new TableOrderDTO()
+                .setId(id)
+                .setTitle(title)
+                .setStatus(status.getValue())
+                ;
+    }
 }

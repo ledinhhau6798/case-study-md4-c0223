@@ -26,10 +26,6 @@ public class Bill {
      @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-     @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private EStatus name;
-
      @OneToOne
     @JoinColumn(name = "order_id",referencedColumnName = "id",nullable = false)
     private Order order;

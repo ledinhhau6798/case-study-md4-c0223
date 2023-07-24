@@ -19,7 +19,7 @@ public class TableOrderServiceImpl implements ITableOrderService{
 
     @Override
     public Optional<TableOrder> findById(Long id) {
-        return Optional.empty();
+        return tableOrderRepository.findById(id);
     }
 
     @Override

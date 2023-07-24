@@ -1,17 +1,14 @@
-//package com.cg.model.dto.tableOrder;
+//package com.cg.model.dto.orderDetail;
 //
 //import lombok.AllArgsConstructor;
 //import lombok.Getter;
 //import lombok.NoArgsConstructor;
 //import lombok.Setter;
 //
-//
-//@Setter
-//@Getter
 //@AllArgsConstructor
 //@NoArgsConstructor
-//public class TableOrderReqDTO {
-//
-//
+//@Getter
+//@Setter
+//public class OrderDetailReqDTO {
 //
 //}

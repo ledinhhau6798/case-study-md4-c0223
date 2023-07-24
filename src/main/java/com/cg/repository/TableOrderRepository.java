@@ -17,4 +17,6 @@ public interface TableOrderRepository extends JpaRepository<TableOrder,Long> {
             ")" +
             "FROM TableOrder AS to")
     List<TableOrderDTO> findAllTableOrderDTO();
+
+
 }

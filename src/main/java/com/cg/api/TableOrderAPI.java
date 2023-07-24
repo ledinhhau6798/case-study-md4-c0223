@@ -23,9 +23,4 @@ public class TableOrderAPI {
         return new ResponseEntity<>(tableOrderDTO,HttpStatus.OK);
     }
 
-//    @PostMapping("/{tableId}")
-//    public ResponseEntity<?> createTable(@ModelAttribute TableOrderReqDTO){
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 }
